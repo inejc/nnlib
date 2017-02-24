@@ -1,2 +1,1 @@
-# nnlib
-Minimal neural networks library for educational purposes
+## Minimal neural networks library for educational purposes
