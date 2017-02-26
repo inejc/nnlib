@@ -34,8 +34,8 @@ class FullyConnectedLayerTest(TestCase):
         self.layer.b = self.b
 
     def test_forward(self):
-        z = self.layer.forward(self.input_)
-        assert_array_equal(z, self.expected_output)
+        output = self.layer.forward(self.input_)
+        assert_array_equal(output, self.expected_output)
         assert_array_equal(self.layer.input_cache, self.input_)
 
     # test backward

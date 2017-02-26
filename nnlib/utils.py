@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def numerical_grad(func, input_, h=1e-4):
+def numerical_grad(func, input_, h=1e-6):
     """Computes partial derivatives of func wrt. input_
     using the center divided difference method."""
     grad = np.zeros(input_.shape)

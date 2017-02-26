@@ -26,8 +26,8 @@ class FullyConnected(object):
         # backward pass when computing the gradient on W
         self.input_cache = input_
 
-        z = np.dot(input_, self.W) + self.b
-        return z
+        output = np.dot(input_, self.W) + self.b
+        return output
 
     def backward(self, grad_top):
         self.d_W = np.dot(self.input_cache.T, grad_top)
