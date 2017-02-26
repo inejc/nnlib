@@ -22,15 +22,15 @@ class UtilsTest(TestCase):
             [8, -10, 12, 1],
             [0, 10, -1, 2]], dtype=float)
 
-        def dot_y(X_):
+        def dot_Y(X_):
             return np.dot(X_, Y)
 
-        expected_grad_x = np.array([
+        expected_grad_X = np.array([
             [6, -5, 8, 11, 11],
             [6, -5, 8, 11, 11],
             [6, -5, 8, 11, 11]], dtype=float)
 
         assert_array_almost_equal(
-            numerical_grad(dot_y, X),
-            expected_grad_x
+            numerical_grad(dot_Y, X),
+            expected_grad_X
         )

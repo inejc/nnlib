@@ -2,7 +2,16 @@ import numpy as np
 
 
 class FullyConnected(object):
-    """A fully connected layer (i.e. dense layer)."""
+    """A fully connected or dense layer.
+
+    Parameters
+    ----------
+    input_dim_1d: int
+        Number of input neurons i.e. input dimensionality.
+
+    num_neurons: int
+        Number of neurons in this layer i.e. output dimensionality.
+    """
 
     def __init__(self, input_dim_1d, num_neurons):
         self.W = 0.01 * np.random.rand(input_dim_1d, num_neurons)

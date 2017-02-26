@@ -39,26 +39,26 @@ class FullyConnectedLayerTest(TestCase):
         assert_array_equal(self.layer.input_cache, self.input_)
 
     # test backward
-    def test_grad_on_w(self):
+    def test_grad_on_W(self):
         self.layer.forward(self.input_)
         self.layer.backward(self.grad_top)
-        grad_w = self.layer.d_W
+        d_W = self.layer.d_W
 
         layer = self.layer
 
-        def forward_as_func_of_w(W_):
+        def forward_as_func_of_W(W_):
             layer.W = W_
             return layer.forward(self.input_)
 
         assert_array_almost_equal(
-            numerical_grad(forward_as_func_of_w, self.W),
-            grad_w
+            numerical_grad(forward_as_func_of_W, self.W),
+            d_W
         )
 
     def test_grad_on_b(self):
         self.layer.forward(self.input_)
         self.layer.backward(self.grad_top)
-        grad_b = self.layer.d_b
+        d_b = self.layer.d_b
 
         layer = self.layer
 
@@ -68,14 +68,14 @@ class FullyConnectedLayerTest(TestCase):
 
         assert_array_almost_equal(
             numerical_grad(forward_as_func_of_b, self.b),
-            grad_b
+            d_b
         )
 
     def test_grad_on_input(self):
         self.layer.forward(self.input_)
-        grad_input = self.layer.backward(self.grad_top)
+        d_input = self.layer.backward(self.grad_top)
 
         assert_array_almost_equal(
             numerical_grad(self.layer.forward, self.input_),
-            grad_input
+            d_input
         )
