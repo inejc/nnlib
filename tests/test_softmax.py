@@ -8,19 +8,19 @@ from nnlib.utils import numerical_grad
 
 
 class SoftmaxWithCrossEntropyLayerTest(TestCase):
-    X = np.array([
-        [1, -2, 1],
-        [0, 1, 5]], dtype=float)
-
-    y = np.array([0, 1])
-
-    expected_probs = np.array([
-        [0.48785555, 0.0242889, 0.48785555],
-        [0.00657326, 0.0178679, 0.97555875]], dtype=float)
-
-    expected_loss = 2.37124
 
     def setUp(self):
+        self.X = np.array([
+            [1, -2, 1],
+            [0, 1, 5]], dtype=float)
+
+        self.y = np.array([0, 1])
+
+        self.expected_probs = np.array([
+            [0.48785555, 0.0242889, 0.48785555],
+            [0.00657326, 0.0178679, 0.97555875]], dtype=float)
+
+        self.expected_loss = 2.37124
         self.layer = SoftmaxWithCrossEntropy()
 
     def test_forward(self):
@@ -35,10 +35,9 @@ class SoftmaxWithCrossEntropyLayerTest(TestCase):
         d_X = self.layer.backward()
 
         layer = self.layer
-        y = self.y
 
         def forward_as_func_of_X(X):
-            return layer.forward(X, y)
+            return layer.forward(X, self.y)
 
         assert_array_almost_equal(
             numerical_grad(forward_as_func_of_X, self.X),

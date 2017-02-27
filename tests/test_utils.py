@@ -9,7 +9,7 @@ from nnlib.utils import numerical_grad
 class UtilsTest(TestCase):
 
     @staticmethod
-    def test_numerical_grad():
+    def test_numerical_grad_ndarray():
         X = np.array([
             [-5, 1, -1, 10, -2],
             [8, 10, -12, 3, 1],
@@ -34,3 +34,10 @@ class UtilsTest(TestCase):
             numerical_grad(dot_Y, X),
             expected_grad_X
         )
+
+    def test_numerical_grad_scalar(self):
+
+        def times_5(x_):
+            return x_ * 5
+
+        self.assertAlmostEqual(numerical_grad(times_5, 12), 5)

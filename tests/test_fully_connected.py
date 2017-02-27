@@ -7,28 +7,27 @@ from nnlib.layers import FullyConnected
 from nnlib.utils import numerical_grad
 
 
-class FullyConnectedLayerTest(TestCase):
+class FullyConnectedTest(TestCase):
     input_dim_1d = 3
     num_neurons = 4
 
-    W = np.array([
-        [1, -1, 5, 0],
-        [-2, -4, 1, 1],
-        [0, -3, 3, 5]], dtype=float)
-
-    b = np.ones((1, num_neurons))
-
-    X = np.array([
-        [1, -2, 1],
-        [0, 1, 5]], dtype=float)
-
-    expected_Z = np.array([
-        [6, 5, 7, 4],
-        [-1, -18, 17, 27]], dtype=float)
-
-    grad_top = np.ones(expected_Z.shape)
-
     def setUp(self):
+        self.X = np.array([
+            [1, -2, 1],
+            [0, 1, 5]], dtype=float)
+
+        self.expected_Z = np.array([
+            [6, 5, 7, 4],
+            [-1, -18, 17, 27]], dtype=float)
+
+        self.grad_top = np.ones(self.expected_Z.shape)
+
+        self.W = np.array([
+            [1, -1, 5, 0],
+            [-2, -4, 1, 1],
+            [0, -3, 3, 5]], dtype=float)
+
+        self.b = np.ones((1, self.num_neurons))
         self.layer = FullyConnected(self.input_dim_1d, self.num_neurons)
         self.layer.W = self.W
         self.layer.b = self.b
@@ -71,7 +70,7 @@ class FullyConnectedLayerTest(TestCase):
             d_b
         )
 
-    def test_grad_on_input(self):
+    def test_grad_on_X(self):
         self.layer.forward(self.X)
         d_X = self.layer.backward(self.grad_top)
 
