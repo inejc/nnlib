@@ -4,9 +4,13 @@ branch = True
 source =
     nnlib
 
+omit =
+    nnlib/tests/*
+
 [report]
 exclude_lines =
     pragma: no cover
+    pass
     def __repr__
     if self\.debug
     raise AssertionError
