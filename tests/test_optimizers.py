@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from nnlib.layers import Layer
-from nnlib.optimizers import SGD, ParamsGrads
+from nnlib.optimizers import SGD, ParamGradNames
 
 
 class DummyLayer(Layer):
@@ -21,8 +21,8 @@ class DummyLayer(Layer):
 
     def updatable_params_grads_names(self):
         return [
-            ParamsGrads(params='dummy_param0', grads='dummy_grad0'),
-            ParamsGrads(params='dummy_param1', grads='dummy_grad1')
+            ParamGradNames(param_name='dummy_param0', grad_name='dummy_grad0'),
+            ParamGradNames(param_name='dummy_param1', grad_name='dummy_grad1')
         ]
 
 
@@ -30,17 +30,17 @@ class SGDTest(TestCase):
 
     def setUp(self):
         self.sgd = SGD(lr=0.5)
+        self.layer = DummyLayer()
 
     def test_register_layer(self):
         self.assertEqual(len(self.sgd.layers), 0)
-        self.sgd.register_layer(DummyLayer())
+        self.sgd.register_layer(self.layer)
         self.assertEqual(len(self.sgd.layers), 1)
-        self.sgd.register_layer(DummyLayer())
+        self.sgd.register_layer(self.layer)
         self.assertEqual(len(self.sgd.layers), 2)
 
     def test_make_updates(self):
-        layer = DummyLayer()
-        self.sgd.register_layer(layer)
+        self.sgd.register_layer(self.layer)
         self.sgd.make_updates()
-        self.assertEqual(layer.dummy_param0, 9)
-        self.assertEqual(layer.dummy_param1, 4.5)
+        self.assertEqual(self.layer.dummy_param0, 9)
+        self.assertEqual(self.layer.dummy_param1, 4.5)

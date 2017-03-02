@@ -1,6 +1,7 @@
 import numpy as np
 
 from nnlib.layers import Layer
+from nnlib.optimizers import ParamGradNames
 
 
 class ReLU(Layer):
@@ -80,3 +81,8 @@ class PReLU(Layer):
         d_X = grad_top
         d_X[self.X_cache < 0] *= self.leakiness
         return d_X
+
+    def updatable_params_grads_names(self):
+        return [
+            ParamGradNames(param_name='leakiness', grad_name='d_leakiness')
+        ]

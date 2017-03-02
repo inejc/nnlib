@@ -23,12 +23,19 @@ class SoftmaxWithCrossEntropyTest(TestCase):
         self.expected_loss = 2.37124
         self.layer = SoftmaxWithCrossEntropy()
 
-    def test_forward(self):
+    def test_forward_with_ground_truths(self):
         loss = self.layer.forward(self.X, self.y)
 
         self.assertAlmostEqual(loss, self.expected_loss, places=6)
         assert_array_almost_equal(self.layer.probs_cache, self.expected_probs)
         assert_array_equal(self.layer.y_cache, self.y)
+
+    def test_forward_no_ground_truths(self):
+        probs = self.layer.forward(self.X, None)
+
+        self.assertEqual(probs.shape, self.expected_probs.shape)
+        assert_array_almost_equal(self.layer.probs_cache, self.expected_probs)
+        self.assertIsNone(self.layer.y_cache)
 
     def test_backward(self):
         self.layer.forward(self.X, self.y)

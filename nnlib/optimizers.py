@@ -4,7 +4,7 @@ from collections import namedtuple
 # data container for parameters and gradients name pairs (object's named
 # attributes) returned by layers whose parameters are backproped into
 # (see nnlib.layers.Layer base class for more details)
-ParamsGrads = namedtuple('ParamsGrads', ['params', 'grads'])
+ParamGradNames = namedtuple('ParamGradNames', ['param_name', 'grad_name'])
 
 
 class Optimizer(ABC):

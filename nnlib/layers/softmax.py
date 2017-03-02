@@ -26,6 +26,12 @@ class SoftmaxWithCrossEntropy(Layer):
         self.y_cache = y
         self.probs_cache = probs
 
+        # ground truths are not present during test time so we can't
+        # compute the value of the loss function and just return the
+        # probabilities instead
+        if y is None:
+            return probs
+
         # compute the value of the loss function
         num_examples = X.shape[0]
 

@@ -1,6 +1,7 @@
 import numpy as np
 
 from nnlib.layers import Layer
+from nnlib.optimizers import ParamGradNames
 
 
 class FullyConnected(Layer):
@@ -39,3 +40,9 @@ class FullyConnected(Layer):
         # top for the next layer during the backward pass
         d_X = np.dot(grad_top, self.W.T)
         return d_X
+
+    def updatable_params_grads_names(self):
+        return [
+            ParamGradNames(param_name='W', grad_name='d_W'),
+            ParamGradNames(param_name='b', grad_name='d_b')
+        ]

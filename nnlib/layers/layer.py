@@ -27,6 +27,6 @@ class Layer(ABC):
 
         Returns
         -------
-            A list of nnlib.optimizers.ParamsGrads namedtuples.
+            A list of nnlib.optimizers.ParamGradNames namedtuples.
         """
         raise NotImplementedError()
