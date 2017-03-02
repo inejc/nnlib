@@ -1,7 +1,9 @@
 import numpy as np
 
+from nnlib.layers import Layer
 
-class ReLU(object):
+
+class ReLU(Layer):
     """A rectified linear unit layer."""
 
     def __init__(self):
@@ -21,7 +23,7 @@ class ReLU(object):
         return d_X
 
 
-class LeakyReLU(object):
+class LeakyReLU(Layer):
     """A leaky rectified linear unit layer.
 
     Parameters
@@ -49,7 +51,7 @@ class LeakyReLU(object):
         return d_X
 
 
-class PReLU(object):
+class PReLU(Layer):
     """A parametric rectified linear unit layer."""
 
     def __init__(self):
@@ -73,6 +75,8 @@ class PReLU(object):
         d_leakiness *= grad_top
         self.d_leakiness = np.sum(d_leakiness)
 
+        # the gradient on input is the new gradient from the
+        # top for the next layer during the backward pass
         d_X = grad_top
         d_X[self.X_cache < 0] *= self.leakiness
         return d_X

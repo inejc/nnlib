@@ -1,7 +1,9 @@
 import numpy as np
 
+from nnlib.layers import Layer
 
-class SoftmaxWithCrossEntropy(object):
+
+class SoftmaxWithCrossEntropy(Layer):
     """A softmax layer with the cross entropy loss on top. The two layers are
     merged to avoid the computation of a full Jacobian matrix (only ground
     truth scores influence the value of the loss function)."""

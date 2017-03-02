@@ -1,7 +1,9 @@
 import numpy as np
 
+from nnlib.layers import Layer
 
-class FullyConnected(object):
+
+class FullyConnected(Layer):
     """A fully connected or dense layer.
 
     Parameters

@@ -7,7 +7,7 @@ from nnlib.layers import SoftmaxWithCrossEntropy
 from nnlib.utils import numerical_grad
 
 
-class SoftmaxWithCrossEntropyLayerTest(TestCase):
+class SoftmaxWithCrossEntropyTest(TestCase):
 
     def setUp(self):
         self.X = np.array([
