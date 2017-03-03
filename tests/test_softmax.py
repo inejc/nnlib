@@ -27,15 +27,15 @@ class SoftmaxWithCrossEntropyTest(TestCase):
         loss = self.layer.forward(self.X, self.y)
 
         self.assertAlmostEqual(loss, self.expected_loss, places=6)
-        assert_array_almost_equal(self.layer.probs_cache, self.expected_probs)
-        assert_array_equal(self.layer.y_cache, self.y)
+        assert_array_almost_equal(self.layer._probs_cache, self.expected_probs)
+        assert_array_equal(self.layer._y_cache, self.y)
 
     def test_forward_no_ground_truths(self):
         probs = self.layer.forward(self.X, None)
 
         self.assertEqual(probs.shape, self.expected_probs.shape)
-        assert_array_almost_equal(self.layer.probs_cache, self.expected_probs)
-        self.assertIsNone(self.layer.y_cache)
+        self.assertIsNone(self.layer._probs_cache)
+        self.assertIsNone(self.layer._y_cache)
 
     def test_backward(self):
         self.layer.forward(self.X, self.y)

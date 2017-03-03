@@ -9,31 +9,32 @@ class FullyConnected(Layer):
 
     Parameters
     ----------
-    input_dim_1d: int
-        Number of input neurons i.e. input dimensionality.
+    num_input_neurons: int
+        Number of input neurons (i.e. the dimensionality of the input
+        data).
 
     num_neurons: int
-        Number of neurons in this layer i.e. output dimensionality.
+        Number of neurons in this layer (i.e. output dimensionality).
     """
 
-    def __init__(self, input_dim_1d, num_neurons):
-        self.W = 0.01 * np.random.rand(input_dim_1d, num_neurons)
+    def __init__(self, num_input_neurons, num_neurons):
+        self.W = 0.01 * np.random.rand(num_input_neurons, num_neurons)
         self.b = np.zeros((1, num_neurons))
 
-        self.X_cache = None
+        self._X_cache = None
         self.d_W = None
         self.d_b = None
 
     def forward(self, X):
         # cache the input so that we can use it at the
         # backward pass when computing the gradient on W
-        self.X_cache = X
+        self._X_cache = X
 
         Z = np.dot(X, self.W) + self.b
         return Z
 
     def backward(self, grad_top):
-        self.d_W = np.dot(self.X_cache.T, grad_top)
+        self.d_W = np.dot(self._X_cache.T, grad_top)
         self.d_b = np.sum(grad_top, axis=0, keepdims=True)
 
         # the gradient on input is the new gradient from the

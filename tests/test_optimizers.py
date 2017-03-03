@@ -33,11 +33,11 @@ class SGDTest(TestCase):
         self.layer = DummyLayer()
 
     def test_register_layer(self):
-        self.assertEqual(len(self.sgd.layers), 0)
+        self.assertEqual(len(self.sgd._layers), 0)
         self.sgd.register_layer(self.layer)
-        self.assertEqual(len(self.sgd.layers), 1)
+        self.assertEqual(len(self.sgd._layers), 1)
         self.sgd.register_layer(self.layer)
-        self.assertEqual(len(self.sgd.layers), 2)
+        self.assertEqual(len(self.sgd._layers), 2)
 
     def test_make_updates(self):
         self.sgd.register_layer(self.layer)

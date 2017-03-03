@@ -11,8 +11,8 @@ class Optimizer(ABC):
     """Base class for all optimizers."""
 
     def __init__(self, lr):
-        self.lr = lr
-        self.layers = []
+        self._lr = lr
+        self._layers = []
 
     @abstractmethod
     def register_layer(self, layer):
@@ -28,7 +28,7 @@ class SGD(Optimizer):
 
     Parameters
     ----------
-    lr: float >= 0 (default=0.01)
+    lr: float >= 0, default 0.01
         Learning rate.
     """
 
@@ -36,18 +36,18 @@ class SGD(Optimizer):
         super().__init__(lr)
 
     def register_layer(self, layer):
-        self.layers.append(layer)
+        self._layers.append(layer)
 
     def make_updates(self):
-        for layer in self.layers:
-            self.update_layer(layer)
+        for layer in self._layers:
+            self._update_layer(layer)
 
-    def update_layer(self, layer):
+    def _update_layer(self, layer):
         params_grads_names = layer.updatable_params_grads_names()
 
         for param_name, grad_name in params_grads_names:
             param = getattr(layer, param_name)
             grad = getattr(layer, grad_name)
 
-            param += - self.lr * grad
+            param += - self._lr * grad
             setattr(layer, param_name, param)

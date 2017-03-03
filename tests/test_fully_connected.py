@@ -35,7 +35,7 @@ class FullyConnectedTest(TestCase):
     def test_forward(self):
         Z = self.layer.forward(self.X)
         assert_array_equal(Z, self.expected_Z)
-        assert_array_equal(self.layer.X_cache, self.X)
+        assert_array_equal(self.layer._X_cache, self.X)
 
     # test backward
     def test_grad_on_W(self):

@@ -30,7 +30,7 @@ class ReLUTest(TestCase):
     def test_forward(self):
         Z = self.layer.forward(self.X)
         assert_array_equal(Z, self.expected_Z)
-        assert_array_equal(self.layer.X_cache, self.X)
+        assert_array_equal(self.layer._X_cache, self.X)
 
     def test_backward(self):
         self.layer.forward(self.X)
