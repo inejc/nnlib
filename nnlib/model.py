@@ -38,7 +38,7 @@ class Model(object):
             if layer.has_updatable_params:
                 self._optimizer.register_layer(layer)
 
-    def train(self, X, y, batch_size, num_epochs, shuffle=True, verbose=False):
+    def fit(self, X, y, batch_size, num_epochs, shuffle=True, verbose=False):
         """Trains the model.
 
         Parameters

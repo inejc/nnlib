@@ -27,7 +27,7 @@ class XorDataTest(TestCase):
         model.add(SoftmaxWithCrossEntropy())
         model.compile(SGD(lr=1))
 
-        model.train(X, y, batch_size=n, num_epochs=180)
+        model.fit(X, y, batch_size=n, num_epochs=180)
         y_pred = model.predict(X)
 
         acc = classification_accuracy(y, y_pred)
