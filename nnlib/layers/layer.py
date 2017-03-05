@@ -1,4 +1,11 @@
 from abc import ABC, abstractmethod
+from collections import namedtuple
+
+# data container for parameters and gradients name pairs (object's named
+# attributes) returned by layers whose parameters are backproped into
+# (see the updatable_params_grads_names() method of the nnlib.layers.Layer
+# base class for more details)
+ParamGradNames = namedtuple('ParamGradNames', ['param_name', 'grad_name'])
 
 
 class Layer(ABC):
@@ -33,6 +40,6 @@ class Layer(ABC):
     def updatable_params_grads_names(self):
         """Should expose all parameters and gradients name pairs (object's
         named attributes) that are backproped into. Should return a list
-        of nnlib.optimizers.ParamGradNames namedtuples.
+        of nnlib.layers.ParamGradNames namedtuples.
         """
         raise NotImplementedError()

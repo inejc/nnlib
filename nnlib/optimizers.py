@@ -1,10 +1,4 @@
 from abc import ABC, abstractmethod
-from collections import namedtuple
-
-# data container for parameters and gradients name pairs (object's named
-# attributes) returned by layers whose parameters are backproped into
-# (see nnlib.layers.Layer base class for more details)
-ParamGradNames = namedtuple('ParamGradNames', ['param_name', 'grad_name'])
 
 
 class Optimizer(ABC):
@@ -16,10 +10,13 @@ class Optimizer(ABC):
 
     @abstractmethod
     def register_layer(self, layer):
+        """Should index the layer and init anything needed to update
+        it later."""
         pass
 
     @abstractmethod
-    def make_updates(self):
+    def update_layers(self):
+        """Should update all registered (updatable) layers' weights."""
         pass
 
 
@@ -38,7 +35,7 @@ class SGD(Optimizer):
     def register_layer(self, layer):
         self._layers.append(layer)
 
-    def make_updates(self):
+    def update_layers(self):
         for layer in self._layers:
             self._update_layer(layer)
 

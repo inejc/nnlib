@@ -81,7 +81,7 @@ class Model(object):
         for X_batch, y_batch in X_y_batches:
             self._forward(X_batch, y_batch)
             self._backward()
-            self._optimizer.make_updates()
+            self._optimizer.update_layers()
 
         if self._verbose:
             self._report_after_epoch(X, y, epoch_index)

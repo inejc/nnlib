@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from nnlib.layers import Layer
-from nnlib.optimizers import SGD, ParamGradNames
+from nnlib.layers import Layer, ParamGradNames
+from nnlib.optimizers import SGD
 
 
 class DummyLayer(Layer):
@@ -41,6 +41,6 @@ class SGDTest(TestCase):
 
     def test_make_updates(self):
         self.sgd.register_layer(self.layer)
-        self.sgd.make_updates()
+        self.sgd.update_layers()
         self.assertEqual(self.layer.dummy_param0, 9)
         self.assertEqual(self.layer.dummy_param1, 4.5)

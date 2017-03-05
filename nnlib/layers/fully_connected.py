@@ -1,7 +1,6 @@
 import numpy as np
 
-from nnlib.layers import Layer
-from nnlib.optimizers import ParamGradNames
+from nnlib.layers import Layer, ParamGradNames
 
 
 class FullyConnected(Layer):
