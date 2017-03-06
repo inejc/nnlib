@@ -46,10 +46,10 @@ from nnlib.optimizers import SGD
 
 model.compile(SGD(lr=0.01))
 ```
-To train the model call the `fit()` method and to make predictions call the `predict()` or the `predict_proba()` method
+To train the model call the `fit()` method and to make predictions call the `predict_proba()` or the `predict()` method
 ```python
 model.fit(X_train, y_train, batch_size=32, num_epochs=100)
 
+y_probs = model.predict_proba(X_test)
 y_pred = model.predict(X_test)
-probs = model.predict_proba(X_test)
 ```
