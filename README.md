@@ -13,7 +13,7 @@ All analytical solutions are gradient checked with a numerical method (a center 
 * [Fully connected layer] (nnlib/layers/fully_connected.py)
 * [Softmax with cross entropy loss layer] (nnlib/layers/softmax.py)
 * [ReLU family activations] (nnlib/layers/relu.py)
-* [Stochastic gradient descent optimizer] (nnlib/optimizers.py)
+* [Stochastic gradient descent optimizer] (nnlib/optimizers/sgd.py)
 
 ### Future plans
 * Dropout

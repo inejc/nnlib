@@ -1,23 +1,4 @@
-from abc import ABC, abstractmethod
-
-
-class Optimizer(ABC):
-    """Base class for all optimizers."""
-
-    def __init__(self, lr):
-        self._lr = lr
-        self._layers = []
-
-    @abstractmethod
-    def register_layer(self, layer):
-        """Should index the layer and init anything needed to update
-        it later."""
-        pass
-
-    @abstractmethod
-    def update_layers(self):
-        """Should update all registered (updatable) layers' weights."""
-        pass
+from nnlib.optimizers import Optimizer
 
 
 class SGD(Optimizer):
@@ -31,9 +12,10 @@ class SGD(Optimizer):
 
     def __init__(self, lr=0.01):
         super().__init__(lr)
+        self._layers = []
 
-    def register_layer(self, layer):
-        self._layers.append(layer)
+    def register_layer(self, updatable_layer):
+        self._layers.append(updatable_layer)
 
     def update_layers(self):
         for layer in self._layers:
