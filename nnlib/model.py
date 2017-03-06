@@ -86,7 +86,7 @@ class Model(object):
         if self._verbose:
             self._report_after_epoch(X, y, epoch_index)
 
-    def _report_after_epoch(self, X, y, epoch_index):
+    def _report_after_epoch(self, X, y, epoch_index):  # pragma: no cover
         """Logs the loss and classification accuracy of the training
         set to stdout."""
         training_loss = self._forward(X, y)
