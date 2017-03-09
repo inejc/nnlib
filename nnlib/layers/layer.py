@@ -26,18 +26,32 @@ class Layer(ABC):
         be returned."""
         pass
 
-    @property
-    def has_updatable_params(self):
-        """Indicates whether the layer has parameters that should be
-        backproped into or not."""
+    def is_regularized(self):
+        """Indicates whether the layer has weights that contribute to the
+        loss value (i.e. exposes weight penalty)."""
         try:
-            self.updatable_params_grads_names()
+            self.get_regularization_loss()
         except NotImplementedError:
             return False
 
         return True
 
-    def updatable_params_grads_names(self):
+    def get_regularization_loss(self):
+        """Should return the value of the regularization loss (i.e. the
+        weight penalty)."""
+        raise NotImplementedError()
+
+    def has_updatable_params(self):
+        """Indicates whether the layer has parameters that should be
+        backproped into or not."""
+        try:
+            self.get_updatable_params_grads_names()
+        except NotImplementedError:
+            return False
+
+        return True
+
+    def get_updatable_params_grads_names(self):
         """Should expose all parameters and gradients name pairs (object's
         named attributes) that are backproped into. Should return a list
         of nnlib.layers.ParamGradNames namedtuples.

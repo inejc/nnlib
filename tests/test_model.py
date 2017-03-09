@@ -1,19 +1,22 @@
 from unittest import TestCase
 
 import numpy as np
+from numpy.testing import assert_array_almost_equal
 
 from nnlib import Model
 from nnlib.layers import FullyConnected, ReLU, PReLU, SoftmaxWithCrossEntropy
 from nnlib.optimizers import SGD
+from nnlib.regularizers import l2
 
 
 class ModelTest(TestCase):
 
     def setUp(self):
-        self.n = 50  # number of examples (data points)
-        self.d = 2  # number of features (dimensionality of the data)
-        self.k = 2  # number of classes
+        self.n = 50   # number of examples (data points)
+        self.d = 2    # number of features (dimensionality of the data)
         self.h = 50  # number of neurons in the hidden layer
+        self.k = 2    # number of classes
+
         self.X = np.random.randn(self.n, self.d)
         self.model = Model()
 
@@ -46,10 +49,11 @@ class ModelTest(TestCase):
         self.assertEqual(y_pred.shape, (self.n,))
 
     def test_predict_proba(self):
-        self.model.add(FullyConnected(self.d, self.h))
+        self.model.add(FullyConnected(self.d, self.h, regularizer=l2(0.5)))
         self.model.add(PReLU())
-        self.model.add(FullyConnected(self.h, self.k))
+        self.model.add(FullyConnected(self.h, self.k, regularizer=l2(0.5)))
         self.model.add(SoftmaxWithCrossEntropy())
 
         probs = self.model.predict_proba(self.X)
         self.assertEqual(probs.shape, (self.n, self.k))
+        assert_array_almost_equal(np.sum(probs, axis=1), np.ones((self.n,)))

@@ -6,6 +6,7 @@ from nnlib import Model
 from nnlib.layers import FullyConnected, ReLU, SoftmaxWithCrossEntropy
 from nnlib.optimizers import SGD
 from nnlib.utils import classification_accuracy
+from tests.utils import xor_data
 
 
 class XorDataTest(TestCase):
@@ -13,12 +14,11 @@ class XorDataTest(TestCase):
     def test_training_accuracy(self):
         n = 50   # number of examples (data points)
         d = 2    # number of features (dimensionality of the data)
-        k = 2    # number of classes
         h = 50   # number of neurons in the hidden layer
+        k = 2    # number of classes
 
         np.random.seed(0)
-        X = np.random.randn(n, d)
-        y = np.logical_xor(X[:, 0] > 0, X[:, 1] > 0).astype(int)
+        X, y = xor_data(num_examples=n)
 
         model = Model()
         model.add(FullyConnected(num_input_neurons=d, num_neurons=h))

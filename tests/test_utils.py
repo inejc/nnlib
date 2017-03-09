@@ -4,7 +4,8 @@ import numpy as np
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 from nnlib.utils import classification_accuracy
-from nnlib.utils import numerical_grad, yield_data_in_batches
+from nnlib.utils import yield_data_in_batches
+from tests.utils import numerical_grad
 
 
 class UtilsTest(TestCase):

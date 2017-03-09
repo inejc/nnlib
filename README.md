@@ -14,12 +14,12 @@ All analytical solutions are gradient checked with a numerical method (a center 
 * [Softmax with cross entropy loss layer] (nnlib/layers/softmax.py)
 * [ReLU family activations] (nnlib/layers/relu.py)
 * [Stochastic gradient descent optimizer] (nnlib/optimizers/sgd.py)
+* [L2 regularization] (nnlib/regularizers.py)
 
 ### Future plans
 * Dropout
 * Batch normalization
 * Different initializations
-* L2 regularization
 * Tanh, Sigmoid activations
 * Convolutional layer
 * Additional optimizers (SGD with momentum, RMSprop, Adagrad, Adam)

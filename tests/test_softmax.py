@@ -4,7 +4,7 @@ import numpy as np
 from numpy.testing import assert_array_almost_equal, assert_array_equal
 
 from nnlib.layers import SoftmaxWithCrossEntropy
-from nnlib.utils import numerical_grad
+from tests.utils import numerical_grad
 
 
 class SoftmaxWithCrossEntropyTest(TestCase):

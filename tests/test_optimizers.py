@@ -19,7 +19,7 @@ class DummyLayer(Layer):
     def backward(self):
         pass
 
-    def updatable_params_grads_names(self):
+    def get_updatable_params_grads_names(self):
         return [
             ParamGradNames(param_name='dummy_param0', grad_name='dummy_grad0'),
             ParamGradNames(param_name='dummy_param1', grad_name='dummy_grad1')

@@ -35,7 +35,7 @@ class Model(object):
         self._optimizer = optimizer
 
         for layer in self._layers:
-            if layer.has_updatable_params:
+            if layer.has_updatable_params():
                 self._optimizer.register_layer(layer)
 
     def fit(self, X, y, batch_size, num_epochs, shuffle=True, verbose=False):
@@ -121,11 +121,21 @@ class Model(object):
     def _forward(self, X, y=None):
         """Performs a complete forward pass on all layers in the
         computational graph."""
+        regularization_loss = 0
+
         for layer in self._layers[:_LAST_LAYER]:
             X = layer.forward(X)
 
-        # pass ground truths to the last layer during the forward pass
-        return self._layers[_LAST_LAYER].forward(X, y)
+            if layer.is_regularized():
+                regularization_loss += layer.get_regularization_loss()
+
+        if y is None:
+            # probabilities are returned from the last layer if
+            # ground truths are not passed to the forward function
+            return self._layers[_LAST_LAYER].forward(X)
+
+        loss = self._layers[_LAST_LAYER].forward(X, y)
+        return loss + regularization_loss
 
     def _backward(self):
         """Performs a complete backward pass on all layers in the

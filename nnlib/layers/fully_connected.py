@@ -14,15 +14,21 @@ class FullyConnected(Layer):
 
     num_neurons: int
         Number of neurons in this layer (i.e. output dimensionality).
+
+    regularizer: nnlib.regularizers.Regularizer, default None
+        Weight regularizer (i.e. regularizer that computes the weights
+        penalty).
     """
 
-    def __init__(self, num_input_neurons, num_neurons):
+    def __init__(self, num_input_neurons, num_neurons, regularizer=None):
         self.W = 0.01 * np.random.rand(num_input_neurons, num_neurons)
         self.b = np.zeros((1, num_neurons))
 
         self._X_cache = None
         self.d_W = None
         self.d_b = None
+
+        self._regularizer = regularizer
 
     def forward(self, X):
         # cache the input so that we can use it at the
@@ -34,6 +40,11 @@ class FullyConnected(Layer):
 
     def backward(self, grad_top):
         self.d_W = np.dot(self._X_cache.T, grad_top)
+
+        # add the regularization gradient if regularization is enabled
+        if self._regularizer is not None:
+            self.d_W += self._regularizer.grad(self.W)
+
         self.d_b = np.sum(grad_top, axis=0, keepdims=True)
 
         # the gradient on input is the new gradient from the
@@ -41,7 +52,13 @@ class FullyConnected(Layer):
         d_X = np.dot(grad_top, self.W.T)
         return d_X
 
-    def updatable_params_grads_names(self):
+    def get_regularization_loss(self):
+        if self._regularizer is None:
+            return 0
+
+        return self._regularizer.loss(self.W)
+
+    def get_updatable_params_grads_names(self):
         return [
             ParamGradNames(param_name='W', grad_name='d_W'),
             ParamGradNames(param_name='b', grad_name='d_b')

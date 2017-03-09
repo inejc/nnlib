@@ -12,7 +12,7 @@ class SoftmaxWithCrossEntropy(Layer):
         self._y_cache = None
         self._probs_cache = None
 
-    def forward(self, X, y):
+    def forward(self, X, y=None):
         # shift the input so that the highest value is
         # zero (improve numerical stability)
         X -= np.max(X, axis=1).reshape((-1, 1))

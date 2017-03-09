@@ -81,7 +81,7 @@ class PReLU(Layer):
         d_X[self._X_cache < 0] *= self.leakiness
         return d_X
 
-    def updatable_params_grads_names(self):
+    def get_updatable_params_grads_names(self):
         return [
             ParamGradNames(param_name='leakiness', grad_name='d_leakiness')
         ]

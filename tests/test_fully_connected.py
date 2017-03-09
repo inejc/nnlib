@@ -4,7 +4,7 @@ import numpy as np
 from numpy.testing import assert_array_equal, assert_array_almost_equal
 
 from nnlib.layers import FullyConnected
-from nnlib.utils import numerical_grad
+from tests.utils import numerical_grad
 
 
 class FullyConnectedTest(TestCase):
@@ -78,3 +78,6 @@ class FullyConnectedTest(TestCase):
             numerical_grad(self.layer.forward, self.X),
             d_X
         )
+
+    def test_regularization_disabled(self):
+        self.assertEqual(self.layer.get_regularization_loss(), 0)

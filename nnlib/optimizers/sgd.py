@@ -22,7 +22,7 @@ class SGD(Optimizer):
             self._update_layer(layer)
 
     def _update_layer(self, layer):
-        params_grads_names = layer.updatable_params_grads_names()
+        params_grads_names = layer.get_updatable_params_grads_names()
 
         for param_name, grad_name in params_grads_names:
             param = getattr(layer, param_name)
