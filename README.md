@@ -10,11 +10,11 @@ It focuses on readability rather than speed and thus aims at providing an easily
 All analytical solutions are gradient checked with a numerical method (a center divided difference formula).
 
 ### Currently implemented
-* [Fully connected layer] (nnlib/layers/fully_connected.py)
-* [Softmax with cross entropy loss layer] (nnlib/layers/softmax.py)
-* [ReLU family activations] (nnlib/layers/relu.py)
-* [Stochastic gradient descent optimizer] (nnlib/optimizers/sgd.py)
-* [L2 regularization] (nnlib/regularizers.py)
+* [Fully connected layer](nnlib/layers/fully_connected.py)
+* [Softmax with cross entropy loss layer](nnlib/layers/softmax.py)
+* [ReLU family activations](nnlib/layers/relu.py)
+* [Stochastic gradient descent optimizer](nnlib/optimizers/sgd.py)
+* [L2 regularization](nnlib/regularizers.py)
 
 ### Future plans
 * Dropout
