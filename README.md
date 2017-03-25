@@ -1,6 +1,8 @@
 ## Minimal neural networks library for educational purposes
 [![Build Status](https://travis-ci.org/inejc/nnlib.svg?branch=master)](https://travis-ci.org/inejc/nnlib)
 [![codecov](https://codecov.io/gh/inejc/nnlib/branch/master/graph/badge.svg)](https://codecov.io/gh/inejc/nnlib)
+[![codebeat badge](https://codebeat.co/badges/6bb37624-a748-4c41-bfd0-a3a7e787f212)](https://codebeat.co/projects/github-com-inejc-nnlib-master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/e1aa9012832442e8849a125ae917f1a0)](https://www.codacy.com/app/inejc/nnlib?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=inejc/nnlib&amp;utm_campaign=Badge_Grade)
 
 A pure Python and NumPy implementation of a neural networks library developed for educational purposes.
 
