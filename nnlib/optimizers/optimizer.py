@@ -9,7 +9,7 @@ class Optimizer(ABC):
 
     @abstractmethod
     def register_layer(self, updatable_layer):
-        """Should index the layer and init anything needed to update
+        """Should index the layer and init everything needed to update
         it later."""
         pass
 

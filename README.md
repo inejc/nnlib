@@ -15,7 +15,7 @@ All analytical solutions are gradient checked with a numerical method (a center 
 * [Fully connected layer](nnlib/layers/fully_connected.py)
 * [Softmax with cross entropy loss layer](nnlib/layers/softmax.py)
 * [ReLU family activations](nnlib/layers/relu.py)
-* [Stochastic gradient descent optimizer](nnlib/optimizers/sgd.py)
+* [Vanilla stochastic gradient descent optimizer + variants](nnlib/optimizers/sgd.py)
 * [L2 regularization](nnlib/regularizers.py)
 
 ### Future plans
@@ -24,7 +24,7 @@ All analytical solutions are gradient checked with a numerical method (a center 
 * Different initializations
 * Tanh, Sigmoid activations
 * Convolutional layer
-* Additional optimizers (SGD with momentum, RMSprop, Adagrad, Adam)
+* Additional optimizers (RMSprop, Adagrad, Adam)
 
 ### Example usage
 A computational graph that maintains the connectivity of the layers is called a `Model` ([see model.py](nnlib/model.py)).
