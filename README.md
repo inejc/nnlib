@@ -55,3 +55,7 @@ model.fit(X_train, y_train, batch_size=32, num_epochs=100)
 y_probs = model.predict_proba(X_test)
 y_pred = model.predict(X_test)
 ```
+### Resources
+- [Stanford's CS231n](https://github.com/cs231n)
+- [Keras](https://github.com/fchollet/keras)
+- [Lasagne](https://github.com/Lasagne/Lasagne)
